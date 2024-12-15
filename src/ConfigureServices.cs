@@ -1,4 +1,5 @@
 ﻿using Chirper.Authentication.Services;
+using Chirper.Common.Contracts;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 
@@ -58,6 +59,6 @@ public static class ConfigureServices
         builder.Services.AddAuthorization();
 
         builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("Jwt"));
-        builder.Services.AddTransient<Jwt>();
+        builder.Services.AddSingleton<ITokenService, Jwt>();
     }
 }

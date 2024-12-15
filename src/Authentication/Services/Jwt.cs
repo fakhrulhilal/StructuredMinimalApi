@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using Chirper.Common.Contracts;
 
 namespace Chirper.Authentication.Services;
 
@@ -10,7 +11,7 @@ public class JwtOptions
     public required string Key { get; init; }
 }
 
-public class Jwt(IOptions<JwtOptions> options)
+public class Jwt(IOptions<JwtOptions> options) : ITokenService
 {
     public string GenerateToken(User user)
     {

@@ -1,4 +1,4 @@
-﻿using Chirper.Authentication.Services;
+﻿using Chirper.Common.Contracts;
 
 namespace Chirper.Authentication.Endpoints;
 
@@ -20,7 +20,7 @@ public class Login : IEndpoint
         }
     }
 
-    private static async Task<Results<Ok<Response>, UnauthorizedHttpResult>> Handle(Request request, AppDbContext database, Jwt jwt, CancellationToken cancellationToken)
+    internal static async Task<Results<Ok<Response>, UnauthorizedHttpResult>> Handle(Request request, AppDbContext database, ITokenService jwt, CancellationToken cancellationToken)
     {
         var user = await database.Users.SingleOrDefaultAsync(x => x.Username == request.Username && x.Password == request.Password, cancellationToken);
 
